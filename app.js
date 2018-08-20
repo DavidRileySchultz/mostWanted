@@ -48,19 +48,19 @@ function searchByTraits(people) {
       break;
   }  
 
-  //let foundPerson = filteredPeople[0];
 
   for(i = 0; i < filteredPeople.length; i++){
     if(filteredPeople == 0){
       alert("Person not found!");
       app();
-  }
-    else if(filteredPeople == 1){
-      mainMenu(foundPerson, people);
+    }
+    else if(filteredPeople > 1){
+      searchByTraits(filteredPeople);
+    }
+    else{
+      mainMenu(filteredPeople[0]);
     }
   }
-  
-
 }
 
 function searchByWeight(people) {
