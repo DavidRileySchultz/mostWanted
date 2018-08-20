@@ -7,7 +7,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-    searchByName(people);
+    mainMenu(searchByName(), people);
     break;
     case 'no':
     searchByTraits(people);
@@ -48,9 +48,18 @@ function searchByTraits(people) {
       break;
   }  
 
-  let foundPerson = filteredPeople[0];
+  //let foundPerson = filteredPeople[0];
 
-  mainMenu(foundPerson, people);
+  for(i = 0; i < filteredPeople.length; i++){
+    if(filteredPeople == 0){
+      alert("Person not found!");
+      app();
+  }
+    else if(filteredPeople == 1){
+      mainMenu(foundPerson, people);
+    }
+  }
+  
 
 }
 
@@ -104,6 +113,7 @@ function searchByGender(people) {
 
 function searchByAge(people) {
   let userInputAge = prompt("How old is the person?");
+  calculateAge();
 
   let newArray = people.filter(function (el) {
     if(el.dob == userInputAge) {
@@ -146,6 +156,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
+    getPersonDescendants();
     // TODO: get person's descendants
     break;
     case "restart":
@@ -158,10 +169,15 @@ function mainMenu(person, people){
   }
 }
 
-function searchByName(people){
+function searchByName(person){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-  displayPerson(firstName, lastName);
+  
+    for(let i = 0;i < data.length; i++){
+      if(data[i].firstName === firstName && data[i].lastName === lastName){
+        return data[i];
+      }
+    }
   // TODO: find the person using the name they entered
 
 }
@@ -186,6 +202,7 @@ function displayPerson(person){
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Kids: " + person.kids + "\n";
+  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
     // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
@@ -220,23 +237,36 @@ function chars(input){
 // }
 
 
-function userInputAge(year, month, day){
- let currentDate = searchByAge();
- let currentYear = currentDate.getFullYear();
- let currentMonth = currentMonth.getUTCMonth() + 1;
- let currentDay = currentDate.getUTCDay();
- let age = currentYear - year;
- if (currentMonth > month) {
-    return age;
- } 
- else {
-     if (currentDay >= day) {
-       return age;
-     } 
-     else {
-       age--;
-       return age;
-     }
- }
+// function userInputAge(year, month, day){
+//  let currentDate = searchByAge();
+//  let currentYear = currentDate.getFullYear();
+//  let currentMonth = currentMonth.getUTCMonth() + 1;
+//  let currentDay = currentDate.getUTCDay();
+//  let age = currentYear - year;
+//  if (currentMonth > month) {
+//     return age;
+//  } 
+//  else {
+//      if (currentDay >= day) {
+//        return age;
+//      } 
+//      else {
+//        age--;
+//        return age;
+//      }
+//  }
+// }
+
+function calculateAge(dob){
+	var dobValue = [];
+	if (dob != null){
+	dobValue = dob.split('/');
+	born = new Date(dobValue[2]-1900, dobValue[0]-1, dobValue[1]);
+	today = new Date();
+	var age =  Math.floor((today.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+	
+		return age;
+	}
+	
 }
 
