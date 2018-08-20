@@ -7,7 +7,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-    // TODO: search by name
+    searchByName(people);
     break;
     case 'no':
     searchByTraits(people);
@@ -30,7 +30,18 @@ function searchByTraits(people) {
     case "weight":
       filteredPeople = searchByWeight(people);
       break;
-    // so on and so forth
+    case "eye color":
+      filteredPeople = searchByEyeColor(people);
+      break;
+    case "gender":
+      filteredPeople = searchByGender(people);
+      break;
+    case "age":
+      filteredPeople = searchByAge(people);
+      break;
+    case "occupation":
+      filteredPeople = searchByOccupation(people);
+      break;      
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -50,7 +61,66 @@ function searchByWeight(people) {
     if(el.weight == userInputWeight) {
       return true;
     }
-    // return true if el.height matches userInputHeight
+  });
+
+  return newArray;
+}
+
+function searchByHeight(people) {
+  let userInputHeight = prompt("How tall is this person?")
+
+  let newArray = people.filter(function (el) {
+    if(el.height == userInputHeight){
+      return true;
+    }
+  });
+
+  return newArray;
+}
+
+function searchByEyeColor(people) {
+  let userInputEyeColor = prompt("What color is this person's eyes?");
+
+  let newArray = people.filter(function (el) {
+    if(el.eyeColor == userInputEyeColor) {
+      return true;
+    }
+  });
+
+  return newArray;
+}
+
+function searchByGender(people) {
+  let userInputGender = prompt("What gender is the person?");
+
+  let newArray = people.filter(function (el) {
+    if(el.gender == userInputGender) {
+      return true;
+    }
+  });
+
+  return newArray;
+}
+
+function searchByAge(people) {
+  let userInputAge = prompt("How old is the person?");
+
+  let newArray = people.filter(function (el) {
+    if(el.age == userInputAge) {
+      return true;
+    }
+  });
+
+  return newArray;
+}
+
+function searchByOccupation(people) {
+  let userInputOccupation = prompt("What is the person's occupation?");
+
+  let newArray = people.filter(function (el) {
+    if(el.occupation == userInputOccupation) {
+      return true;
+    }
   });
 
   return newArray;
@@ -70,7 +140,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    displayPerson(personInfo);
     break;
     case "family":
     // TODO: get person's family
@@ -108,7 +178,14 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Age: " + person.age + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Eye Color: " + person.eyecolor + "\n";
+  personInfo += "Parents: " + person.parents + "\n";
+  personInfo += "Kids: " + person.kids + "\n";
+    // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
@@ -130,8 +207,37 @@ function chars(input){
   return true; // default validation only
 }
 
+//age
+// function searchByAge(people){
+//  let userInputAge = prompt("Do you know the person's date of birth: ");
+//  let newArray = people.filter(function (el) {
+//    if(el.dob == userInputAge) {
+//      return true;
+//    }
+// });
+
+// }
 
 
+function userInputAge(year, month, day){
+ let currentDate = new Date ();
+ let currentYear = currentDate.getFullYear();
+ let currentMonth = currentMonth.getUTCMonth() + 1;
+ let currentDay = currentDate.getUTCDay();
+ let age = currentYear - year;
+ if (currentMonth > month) {
+    return age;
+ } 
+ else {
+     if (currentDay >= day) {
+       return age;
+     } 
+     else {
+       age--;
+       return age;
+     }
+ }
+}
 
 
-// this is a test comment
+// test
