@@ -41,7 +41,7 @@ function searchByTraits(people) {
       break;
     case "occupation":
       filteredPeople = searchByOccupation(people);
-      break;      
+      break;    
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -106,7 +106,7 @@ function searchByAge(people) {
   let userInputAge = prompt("How old is the person?");
 
   let newArray = people.filter(function (el) {
-    if(el.age == userInputAge) {
+    if(el.dob == userInputAge) {
       return true;
     }
   });
@@ -140,7 +140,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayPerson(personInfo);
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -161,7 +161,7 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
+  displayPerson(firstName, lastName);
   // TODO: find the person using the name they entered
 
 }
@@ -180,9 +180,10 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Age: " + person.age + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
-  personInfo += "Eye Color: " + person.eyecolor + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Kids: " + person.kids + "\n";
     // TODO: finish getting the rest of the information to display
@@ -220,7 +221,7 @@ function chars(input){
 
 
 function userInputAge(year, month, day){
- let currentDate = new Date ();
+ let currentDate = searchByAge();
  let currentYear = currentDate.getFullYear();
  let currentMonth = currentMonth.getUTCMonth() + 1;
  let currentDay = currentDate.getUTCDay();
@@ -238,3 +239,4 @@ function userInputAge(year, month, day){
      }
  }
 }
+
