@@ -207,6 +207,7 @@ function chars(input){
   return true; // default validation only
 }
 
+<<<<<<< HEAD:app.js
 //age
 // function searchByAge(people){
 //  let userInputAge = prompt("Do you know the person's date of birth: ");
@@ -239,3 +240,10 @@ function userInputAge(year, month, day){
  }
 }
 
+=======
+
+
+
+
+// this is a test comment
+>>>>>>> 49033a069dd8b854b239ed416c99938c47f21496:mostWanted.js
