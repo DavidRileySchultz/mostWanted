@@ -238,6 +238,3 @@ function userInputAge(year, month, day){
      }
  }
 }
-
-
-// test
