@@ -113,15 +113,33 @@ function searchByGender(people) {
 
 function searchByAge(people) {
   let userInputAge = prompt("How old is the person?");
-  calculateAge();
-
   let newArray = people.filter(function (el) {
-    if(el.dob == userInputAge) {
+    let age = getAge(el.dob);
+    if(age == userInputAge) {
       return true;
     }
   });
-
   return newArray;
+}
+
+function getAge(dateString) {
+    let dates = dateString.split("/");
+    let d = new Date();
+
+    let userMonth = dates[0];
+    let userDay = dates[1];
+    let userYear = dates[2];
+
+    let curMonth= d.getMonth()+1;
+    let curDay = d.getDate();
+    let curYear = d.getFullYear();
+
+    let age = curYear - userYear;
+
+    if((curMonth < userMonth) || ( (curMonth == userMonth) && curDay < userDay)){
+        age--;
+    }
+    return age;
 }
 
 function searchByOccupation(people) {
@@ -225,48 +243,5 @@ function chars(input){
   return true; // default validation only
 }
 
-//age
-// function searchByAge(people){
-//  let userInputAge = prompt("Do you know the person's date of birth: ");
-//  let newArray = people.filter(function (el) {
-//    if(el.dob == userInputAge) {
-//      return true;
-//    }
-// });
 
-// }
-
-
-// function userInputAge(year, month, day){
-//  let currentDate = searchByAge();
-//  let currentYear = currentDate.getFullYear();
-//  let currentMonth = currentMonth.getUTCMonth() + 1;
-//  let currentDay = currentDate.getUTCDay();
-//  let age = currentYear - year;
-//  if (currentMonth > month) {
-//     return age;
-//  } 
-//  else {
-//      if (currentDay >= day) {
-//        return age;
-//      } 
-//      else {
-//        age--;
-//        return age;
-//      }
-//  }
-// }
-
-function calculateAge(dob){
-	var dobValue = [];
-	if (dob != null){
-	dobValue = dob.split('/');
-	born = new Date(dobValue[2]-1900, dobValue[0]-1, dobValue[1]);
-	today = new Date();
-	var age =  Math.floor((today.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
-	
-		return age;
-	}
-	
-}
 
